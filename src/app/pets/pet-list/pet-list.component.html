@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-3">
+        <p>Category: </p>
+        <select name="category" id="category" [(ngModel)]="parameters.filter.category" (change)="refresh()" >
+            <option value="">All</option>
+            <option value="dog">Dogs</option>
+            <option value="cat">Cats</option>
+            <option value="other">Others</option>
+        </select>
+    </div>
+    <div class="col-6">
+        <div>
+            <form action="#">
+                <p>Sex: </p>
+                <input type="radio" name="radioSort" id="" #any (change) = "updateSex($event)" checked>
+                <label for="any">Any</label>
+                <input type="radio" name="radioSort" id="m" #male (change) = "updateSex($event)">
+                <label for="male">Male</label><br>
+                <input type="radio" name="radioSort" id="f" #female (change) = "updateSex($event)">
+                <label for="female">Female</label><br>
+            </form>
+        </div>
+    </div>
+    <div class="col-3">
+        <p>Sort by: </p>
+        <select name="sort" id="sort" [(ngModel)] = "parameters.sort" (change) = "refresh()">
+            <option>---</option>
+            <option value="name">Name</option>
+            <option value="size_kg">Size</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3" *ngFor = "let item of pets?.results">
+        <div class="col-9">
+            <img src="{{item.image}}" alt="kucni ljubimac" style="height: 300px; width: 300px;" >
+            <br>
+            <h2 style="text-align: center;" [routerLink] = "['/pets', item._id]" style="cursor: pointer;">{{item.name}}</h2>
+            <p><strong>Categori: </strong> {{item.category}}</p>
+            <p><strong>Size: </strong> {{item.size_kg}} kg</p>
+            
+            <p *ngIf = "item.sex == 'm'">Sex: Male</p>
+            <p *ngIf = "item.sex == 'f'">Sex: Female</p>
+        </div>
+    </div>
+</div>

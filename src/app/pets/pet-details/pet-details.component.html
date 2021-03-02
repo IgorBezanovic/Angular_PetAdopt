@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-6">
+        <div class="row">
+            <div class="col-6">
+                <img src="{{pet?.image}}" alt="Slika ljubimca">
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3>{{pet?.name}}</h3>
+                <p>Category: {{pet?.category}}</p>
+                <p>Sex: {{pet?.sex}}</p>
+                <p>Size: {{pet?.size_kg}} kg</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p>{{pet?.story}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <br>
+        <form [formGroup]="adopterForm" (submit)="newAdopter()">
+        <div class="form-group">
+            <input class="form-control" formControlName="name" type="text" placeholder="Enter your fuil name">
+            
+            <small class="text-danger" 
+                   *ngIf="adopterForm.controls.name.touched && adopterForm.controls.name.errors?.required">
+                   Ime je obavezno polje</small>
+        
+            <small class="text-danger" 
+                   *ngIf="adopterForm.controls.name.touched && adopterForm.controls.name.errors?.minlength">
+                   Ime mora da sadrzi minimum dva karaktera</small>
+        </div>
+
+        <div class="form-group">
+            <input class="form-control" formControlName="contact" type="text" placeholder="Enter your contact info (email/phone)" >
+            
+            <small class="text-danger" 
+            *ngIf="adopterForm.controls.contact.touched && adopterForm.controls.contact.errors?.required">
+            Kontakt je obavezno polje</small>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit"
+            [disabled]="adopterForm.invalid">Submit request</button>
+        </div>
+        </form>
+    </div>
+</div>
